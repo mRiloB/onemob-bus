@@ -3,7 +3,7 @@
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="flex align-items">
-          <img src="/src/assets/logo-horizontal.png" height="60" />
+          <img src="src/assets/logo-horizontal.png" height="60" />
         </q-toolbar-title>
 
         <!-- <q-btn dense flat icon="dashboard" @click="toggleMenu" /> -->
