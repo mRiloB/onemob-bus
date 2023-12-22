@@ -17,13 +17,13 @@ export function useVouchers () {
     return data?.map((vou) => vou as Voucher);
   };
 
-  const getVouchersByDateRange = async () => {
-    const { from, to } = dtRange;
+  const getVouchersByDateRange = async (range: { from: string, to: string }) => {
+    const { from, to } = range;
     const { data, error } = await sb
       .from('vouchers')
       .select()
-      .gt('created_at', from)
-      .lt('created_at', to);
+      .gt('created_at', from.concat(' 00:00:00'))
+      .lt('created_at', to.concat(' 23:59:59'));
     if (error) throw Error(`${error.code} - ${error.message}`);
     if (data?.length == 0) return new Array<Voucher>();
     return data?.map((vou) => vou as Voucher);

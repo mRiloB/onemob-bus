@@ -1,54 +1,9 @@
 <script lang='ts' setup>
-import { onMounted, ref } from 'vue';
-import { useBus } from 'src/composables';
-import { Point } from 'src/models';
-
-const ub = useBus();
-const isLoading = ref<boolean>(false);
-const busPoints = ref<Point[]>([]);
-const options = ref<{
-  name: string;
-  count: number;
-}[]>([]);
-
-async function loadBus () {
-  isLoading.value = true;
-  busPoints.value = await ub.getAll();
-  let aux = await ub.getCountByPoint(busPoints.value);
-  options.value = aux.filter(point => point.count > 0).sort((a, b) => {
-    if (a.name > b.name) return 1;
-    if (a.name < b.name) return -1;
-    return 0;
-  });
-  isLoading.value = false;
-}
-
-onMounted(async () => await loadBus());
+import PointView from 'src/components/PointView.vue';
 </script>
 
 <template>
   <q-page padding>
-    <div class="text-h5">Emitidas por Ônibus</div>
-
-    <q-list padding bordered class="rounded-borders bg-accent q-mt-sm">
-      <q-expansion-item dense dense-toggle expand-separator icon="tune" label="Filtros">
-        <q-card>
-          <q-card-section>
-            em breve...
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-    </q-list>
-
-    <q-list bordered separator class="rounded-borders bg-accent q-mt-sm">
-      <q-linear-progress indeterminate v-if="isLoading" />
-      <q-item clickable v-ripple v-for="(point, k) in options" :key="k">
-        <q-item-section avatar>
-          <q-icon name="directions_bus" />
-        </q-item-section>
-        <q-item-section>{{ point.name }}</q-item-section>
-        <q-item-section side>{{ point.count }}</q-item-section>
-      </q-item>
-    </q-list>
+    <point-view title="Emitidas por Ônibus" type="onibus" icon="directions_bus" />
   </q-page>
 </template>
