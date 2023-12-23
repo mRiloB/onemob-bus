@@ -17,7 +17,7 @@ function toggleDrawer () {
           <img src="../assets/logo-horizontal.png" height="60" />
         </q-toolbar-title>
 
-        <q-btn flat :to="{ name: 'home' }" icon="home" />
+        <!-- <q-btn flat :to="{ name: 'home' }" icon="home" /> -->
       </q-toolbar>
     </q-header>
 
