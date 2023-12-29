@@ -53,10 +53,10 @@ onBeforeUnmount(() => clearInterval(interval.value));
 
 <template>
   <q-card>
+    <q-linear-progress indeterminate v-if="isLoading" />
     <q-card-section>
       <div class="text-h6">{{ title }}</div>
-      <q-spinner color="primary" size="3em" v-if="isLoading" />
-      <div v-else>
+      <div>
         <div class="text-h4 text-center">{{ vouchers.length }}</div>
         <div class="text-h6">Total: {{ totalCurrency }}</div>
       </div>

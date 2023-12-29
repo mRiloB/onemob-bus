@@ -45,7 +45,7 @@ onBeforeUnmount(() => clearInterval(interval.value));
       <apexchart type="bar" :options="{
         chart: {
           type: 'bar',
-          height: 250
+          height: 240
         },
         plotOptions: {
           bar: {

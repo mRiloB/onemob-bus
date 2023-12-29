@@ -1,8 +1,9 @@
 <script lang='ts' setup>
 import { onMounted, ref, toRefs, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { useSales, useSwal } from 'src/composables';
+import { useBusDetailsStore } from 'src/stores/bus-details';
 import DateRange from './DateRange.vue';
-import PointDetails from './PointDetails.vue';
 
 const props = defineProps<{
   type: 'onibus' | 'rodoviaria',
@@ -12,17 +13,15 @@ const props = defineProps<{
 const { type, title, icon } = toRefs(props);
 const us = useSales();
 const swal = useSwal();
+const bd = useBusDetailsStore();
+const router = useRouter();
 const isLoading = ref<boolean>(false);
 const options = ref<{
   name: string;
   count: number;
 }[]>([]);
 const dateRange = ref<{ from: string, to: string } | string>('');
-const params = ref<{ point: string, dtFrom: string, dtTo: string }>({
-  point: '', dtFrom: '', dtTo: '',
-});
 const issued = ref<boolean>(false);
-const sdialog = ref<boolean>(false);
 
 async function loadOptions () {
   isLoading.value = true;
@@ -48,14 +47,8 @@ async function loadOptions () {
 }
 
 function openDetails (point: string) {
-  const dtRange = typeof dateRange.value == 'string' ?
-    { from: dateRange.value, to: dateRange.value } : dateRange.value;
-  params.value = {
-    point: point,
-    dtFrom: dtRange.from,
-    dtTo: dtRange.to
-  };
-  sdialog.value = true;
+  bd.setName(point);
+  router.push({ name: 'point-details' });
 }
 
 const totalIssued = computed(() => {
@@ -104,18 +97,5 @@ onMounted(async () => await loadOptions());
         </q-item-section>
       </q-item>
     </q-list>
-
-    <q-dialog v-model="sdialog">
-      <q-card>
-        <q-card-section class="row items-center q-pb-none">
-          <q-space />
-          <q-btn icon="close" flat round dense v-close-popup />
-        </q-card-section>
-
-        <q-card-section>
-          <PointDetails :point="params.point" :dtFrom="params.dtFrom" :dtTo="params.dtTo" v-if="sdialog" />
-        </q-card-section>
-      </q-card>
-    </q-dialog>
   </div>
 </template>

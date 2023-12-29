@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
         name: 'station',
         component: () => import('pages/StationReport.vue'),
       },
+      {
+        path: 'point-details',
+        name: 'point-details',
+        component: () => import('pages/PointDetails.vue'),
+      },
     ],
   },
   // Always leave this as last one,
