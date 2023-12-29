@@ -58,7 +58,7 @@ onBeforeUnmount(() => clearInterval(interval.value));
     <template v-slot:top>
       <div class="text-h6">Últimas vendas</div>
       <q-space></q-space>
-      <q-btn color="primary" :to="{ name: 'bus' }" v-show="!all">Mostrar todos</q-btn>
+      <!-- <q-btn color="primary" :to="{ name: 'bus' }" v-show="!all">Mostrar todos</q-btn> -->
     </template>
   </q-table>
 </template>

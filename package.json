@@ -17,6 +17,7 @@
     "@supabase/supabase-js": "^2.38.4",
     "apexcharts": "^3.44.0",
     "date-fns": "^3.0.0",
+    "pinia": "^2.1.7",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",

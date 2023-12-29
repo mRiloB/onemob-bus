@@ -23,7 +23,24 @@ function useSales () {
     }));
   };
 
-  return { totalSalesByPoint, totalSalesByDateRange };
+  const top5Sales = async () => {
+    const bus = await totalSalesByPoint('onibus');
+    const station = await totalSalesByPoint('rodoviaria');
+    return [
+      ...bus,
+      ...station,
+    ].sort(function comparar (a, b) {
+      if (a.count < b.count) {
+        return -1;
+      }
+      if (a.count > b.count) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  return { totalSalesByPoint, totalSalesByDateRange, top5Sales };
 }
 
 export { useSales };
