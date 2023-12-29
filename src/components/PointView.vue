@@ -92,7 +92,7 @@ onMounted(async () => await loadOptions());
         </q-item-section>
       </q-item>
       <!-- @click="openDetails(point.name)" -->
-      <q-item clickable v-ripple v-for="(point, k) in options" :key="k" @click="openDetails(point.name)">
+      <q-item clickable v-ripple v-for="(point, k) in options" :key="k">
         <q-item-section avatar>
           <q-avatar color="primary" rounded>
             <q-icon :name="icon" color="white" />
